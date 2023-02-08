@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "allowJs": true,
+    "target": "es5",
+    "module": "commonjs",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "newLine": "lf"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}
