@@ -1,4 +1,3 @@
-import { stub } from 'sinon';
 import { expect } from 'chai';
 import axios from 'axios';
 import * as nock from 'nock';

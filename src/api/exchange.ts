@@ -5,6 +5,7 @@ import { createKey, findAvailableCurrency } from '../tools';
 export async function exchange(app: IApp, ctx: Application.Context, next: Application.Next) {
     const targetKey = String(ctx.query.targetKey);
     const sourceKey = ctx.query.sourceKey;
+
     const checkedSources = [];
     const results = [];
     const exchangeList = await app.exchangeApi.getCurrency();
