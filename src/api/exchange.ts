@@ -1,3 +1,4 @@
+import * as Papaparse from 'papaparse';
 import * as Application from 'koa';
 import { IApp } from '../interfaces/IApp';
 import { createKey, findAvailableCurrency } from '../tools';
@@ -23,5 +24,8 @@ export async function exchange(app: IApp, ctx: Application.Context, next: Applic
             checkedSources.push(currencyKey);
         }
     })
-    ctx.body = results;
+
+    ctx.type = 'text/csv';
+    ctx.response.attachment(`${sourceKey}-${targetKey}.csv`);
+    ctx.body = Papaparse.unparse(results);
 }
