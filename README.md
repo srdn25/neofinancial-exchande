@@ -34,4 +34,4 @@ Utilizing the API data, return the best possible conversion rate for every curre
    - update SEED to value provided from `api-coding-challenge.neofinancial.com`
    - install packages via `npm i`
    - execute command `npm run start`
-   - send GET request to `http://localhost:3000/find-best-exchange`
+   - send GET request to `http://localhost:3000/find-best-exchange?sourceKey=CAD&targetKey=PHP`
