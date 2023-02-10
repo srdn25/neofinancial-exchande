@@ -4,8 +4,8 @@ import { Server } from 'http';
 import {IExchangeApi} from './IExchangeApi';
 
 export interface IApp {
-    koa: Application<Application.DefaultState, Application.DefaultContext>,
-    router: Router,
-    httpServer: Server,
-    exchangeApi?: IExchangeApi,
+    koa: Application<Application.DefaultState, Application.DefaultContext>;
+    router: Router;
+    httpServer: Server;
+    exchangeApi?: IExchangeApi;
 }

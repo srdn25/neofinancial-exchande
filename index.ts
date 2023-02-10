@@ -16,7 +16,7 @@ import exchangeApiInit from './src/initializers/exchangeApi';
     };
 
     for (const event of [ 'uncaughtException', 'unhandledRejection' ]) {
-        process.on(event, error => {
+        process.on(event, (error) => {
             process.stderr.write(error);
             process.exit(1);
         })

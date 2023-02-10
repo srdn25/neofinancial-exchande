@@ -7,6 +7,7 @@
     "removeComments": true,
     "resolveJsonModule": true,
     "sourceMap": true,
+    "inlineSources": true,
     "newLine": "lf"
   },
   "include": ["./src/**/*"],
