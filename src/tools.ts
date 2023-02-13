@@ -25,17 +25,17 @@ export const isTarget = (currency: ICurrency, targetKey: string): boolean | IGet
     return false;
 };
 
-export const findAvailableCurrency = (currency: ICurrency, array: ICurrency[], targetKey: string, results: IGetExchangeResponseFormat[]): ICurrency[] => {
-    return array
-        .filter((el) => el.fromCurrencyCode === currency.toCurrencyCode)
-        .map((curr) => {
-            curr.prev = currency;
-            const targetFound = isTarget(curr, targetKey);
-            if (typeof targetFound === 'object') {
-                results.push(targetFound);
-                return curr;
-            }
-            curr.next = findAvailableCurrency(curr, array, targetKey, results);
+export const findAvailableCurrency = (parent: ICurrency, currencies, targetKey: string, results: IGetExchangeResponseFormat[]): void => {
+    const currencyList = currencies.get(parent.toCurrencyCode) || [];
+
+    currencyList.map((curr) => {
+        curr.prev = parent;
+        const targetFound = isTarget(curr, targetKey);
+        if (typeof targetFound === 'object') {
+            results.push(targetFound);
             return curr;
-        });
+        }
+        curr.next = findAvailableCurrency(curr, currencies, targetKey, results);
+        return curr;
+    });
 };

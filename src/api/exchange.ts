@@ -1,29 +1,37 @@
 import * as Papaparse from 'papaparse';
 import * as Application from 'koa';
 import { IApp } from '../interfaces/IApp';
-import { createKey, findAvailableCurrency } from '../tools';
+import { findAvailableCurrency } from '../tools';
+import { ICurrency } from '../interfaces/IEntities';
 
 export async function exchange(app: IApp, ctx: Application.Context, next: Application.Next) {
     const targetKey = String(ctx.query.targetKey);
     const sourceKey = ctx.query.sourceKey;
 
-    const checkedSources = [];
+
+    const parentsList = [];
+    const currenciesMap = new Map<string, ICurrency[]>();
     const results = [];
+
     const exchangeList = await app.exchangeApi.getCurrency();
 
+    // go first cycle for prepare parent list and currencies Map
     exchangeList.forEach((currency) => {
-        const currencyKey = createKey(currency);
-
         // find parents
-        if (currency.fromCurrencyCode === sourceKey && !checkedSources.includes(currencyKey)) {
+        if (currency.fromCurrencyCode === sourceKey) {
             // go through all data from api
             // try to find when have next
-            currency.next = findAvailableCurrency(currency, exchangeList, targetKey, results);
-
-            // add to list for ignore it in future
-            checkedSources.push(currencyKey);
+            parentsList.push(currency);
+        } else {
+            const existsCurrency = currenciesMap.get(currency.fromCurrencyCode);
+            currenciesMap.set(currency.fromCurrencyCode, existsCurrency ? [ ...existsCurrency, currency ] : [ currency ]);
         }
     })
+
+    // cycle by parent list
+    parentsList.forEach((parent) => {
+        findAvailableCurrency(parent, currenciesMap, targetKey, results);
+    });
 
     ctx.type = 'text/csv';
     ctx.response.attachment(`${sourceKey}-${targetKey}.csv`);

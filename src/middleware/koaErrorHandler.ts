@@ -1,5 +1,7 @@
-export default function handleErrors(app): void {
-    app.use(async (ctx, next) => {
+import { IApp } from '../interfaces/IApp';
+
+export default function handleErrors(app: IApp): void {
+    app.koa.use(async (ctx, next) => {
         try {
             await next();
         } catch (err) {
