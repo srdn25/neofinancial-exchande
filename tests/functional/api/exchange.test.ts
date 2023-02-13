@@ -52,9 +52,9 @@ describe('Exchange handler should return data', () => {
 
 
         expect(response.text).to.be.eql('rate,code,countries,amount\r\n' +
+            '40.654467586845776,"CAD, USD, CNY, HKD, PHP","Canada Dollar, USA Dollar, China Yuan/Renminbi, Hong Kong Dollar, Philippines Peso",4065.4467586845776\r\n' +
             '39.85282220069447,"CAD, HKD, PHP","Canada Dollar, Hong Kong Dollar, Philippines Peso",3985.282220069447\r\n' +
-            '2.9274599668373753,"CAD, USD, HKD, PHP","Canada Dollar, USA Dollar, Hong Kong Dollar, Philippines Peso",292.74599668373753\r\n' +
-            '40.654467586845776,"CAD, USD, CNY, HKD, PHP","Canada Dollar, USA Dollar, China Yuan/Renminbi, Hong Kong Dollar, Philippines Peso",4065.4467586845776');
+            '2.9274599668373753,"CAD, USD, HKD, PHP","Canada Dollar, USA Dollar, Hong Kong Dollar, Philippines Peso",292.74599668373753');
         scope.done();
     });
 });

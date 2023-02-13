@@ -35,3 +35,6 @@ Utilizing the API data, return the best possible conversion rate for every curre
    - install packages via `npm i`
    - execute command `npm run start`
    - send GET request to `http://localhost:3000/find-best-exchange?sourceKey=CAD&targetKey=PHP`
+
+Best solution on first row (the highest rate).
+I added sorting before send response

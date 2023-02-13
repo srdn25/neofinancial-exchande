@@ -35,5 +35,5 @@ export async function exchange(app: IApp, ctx: Application.Context, next: Applic
 
     ctx.type = 'text/csv';
     ctx.response.attachment(`${sourceKey}-${targetKey}.csv`);
-    ctx.body = Papaparse.unparse(results);
+    ctx.body = Papaparse.unparse(results.sort((a, b) => a.rate < b.rate ? 1 : -1));
 }
