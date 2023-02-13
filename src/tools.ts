@@ -32,7 +32,11 @@ export const findAvailableCurrency = (parent: ICurrency, currencies, targetKey: 
         curr.prev = parent;
         const targetFound = isTarget(curr, targetKey);
         if (typeof targetFound === 'object') {
-            results.push(targetFound);
+            if (results.length && results[0].rate < targetFound.rate) {
+                results.unshift(targetFound);
+            } else {
+                results.push(targetFound);
+            }
             return curr;
         }
         curr.next = findAvailableCurrency(curr, currencies, targetKey, results);

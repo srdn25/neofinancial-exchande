@@ -37,4 +37,3 @@ Utilizing the API data, return the best possible conversion rate for every curre
    - send GET request to `http://localhost:3000/find-best-exchange?sourceKey=CAD&targetKey=PHP`
 
 Best solution on first row (the highest rate).
-I added sorting before send response
