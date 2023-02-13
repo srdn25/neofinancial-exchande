@@ -1,9 +1,11 @@
 import {
     IBaseApi,
-    IExchangeApi, IExchangeApiResponse,
+    IExchangeApi,
+    IExchangeApiResponse,
 } from '../interfaces/IExchangeApi';
+import HttpError from '../errors/httpError';
 
-export default class ExcangeApi implements IExchangeApi {
+export default class ExchangeApi implements IExchangeApi {
     private baseApi: IBaseApi;
     private seed: string;
     constructor(baseApi: IBaseApi, seed: string) {
@@ -19,7 +21,7 @@ export default class ExcangeApi implements IExchangeApi {
         })
 
         if (!response.data || !response.data.length) {
-            throw Error('response has not data');
+            throw new HttpError(503, 'Source server not working');
         }
 
         return response.data;
