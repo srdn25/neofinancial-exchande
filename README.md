@@ -29,11 +29,16 @@ Utilizing the API data, return the best possible conversion rate for every curre
 
 
 ### For start application
- - use local node.js
+ - via local node.js
    - copy .env.example to .env
    - update SEED to value provided from `api-coding-challenge.neofinancial.com`
    - install packages via `npm i`
    - execute command `npm run start`
    - send GET request to `http://localhost:3000/find-best-exchange?sourceKey=CAD&targetKey=PHP`
+
+ - via docker
+   - make sure you have installed docker
+   - execute command for build `docker build -t neo-financial .`
+   - run container `docker run -dp 3000:3000 neo-financial`
 
 Best solution on first row (the highest rate).
