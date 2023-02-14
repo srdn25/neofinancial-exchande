@@ -1,6 +1,6 @@
 {
   "name": "neofinancial-exchande",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Find the best currency conversion possible for our customers. However, we don’t have direct Canadian Dollar conversions to all currencies so we have to trade currencies for other currencies. It is possible that we can go from one currency to another, and that a currency could show up multiple times",
   "main": "index.js",
   "engines": {
@@ -9,6 +9,7 @@
   "scripts": {
     "start": "npm run build && node -r dotenv/config ./index.js",
     "build": "npm test && tsc ./index.ts",
+    "dev": "node -r ts-node/register -r dotenv/config index.ts dotenv_config_path=.env.test",
     "test": "mocha -r ts-node/register -r dotenv/config 'tests/**/*.test.ts' dotenv_config_path=.env.test"
   },
   "repository": {

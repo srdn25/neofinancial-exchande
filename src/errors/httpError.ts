@@ -5,7 +5,7 @@ export default class HttpError extends Error implements IError {
     public message: string;
     public name: string;
 
-    constructor(status: number = 500, message: string) {
+    constructor(status: number, message: string) {
         super(message);
         this.message = message;
         this.status = status;

@@ -53,7 +53,7 @@ describe('Exchange API should correct return data', () => {
         }
 
         expect(error).to.be.an.instanceof(Error);
-        expect(error.message).to.be.eql('Source server not working');
+        expect(error.message).to.be.eql('Source server response with empty data');
 
         scope.done();
     })

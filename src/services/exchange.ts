@@ -18,10 +18,12 @@ export default class ExchangeApi implements IExchangeApi {
             params: {
                 seed: this.seed,
             }
-        })
+        }).catch((err) => {
+            throw new HttpError(503, `Source server not working. ${err.message}`);
+        });
 
         if (!response.data || !response.data.length) {
-            throw new HttpError(503, 'Source server not working');
+            throw new HttpError(503, 'Source server response with empty data');
         }
 
         return response.data;
