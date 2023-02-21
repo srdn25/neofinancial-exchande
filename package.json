@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npm run build && node -r dotenv/config ./index.js",
     "build": "npm test && tsc ./index.ts",
-    "dev": "node -r ts-node/register -r dotenv/config index.ts dotenv_config_path=.env.test",
+    "dev": "node -r ts-node/register -r dotenv/config index.ts dotenv_config_path=.env",
     "test": "mocha -r ts-node/register -r dotenv/config 'tests/**/*.test.ts' dotenv_config_path=.env.test"
   },
   "repository": {
