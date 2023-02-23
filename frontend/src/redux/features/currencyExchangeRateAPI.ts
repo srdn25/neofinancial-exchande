@@ -7,10 +7,22 @@ export interface IResponseGetFindExchangeRate {
     amount:number;
 }
 
+export interface IFetchRate {
+    response: IResponseGetFindExchangeRate[];
+    source: string;
+    target: string;
+}
+
 const baseApi = axios.create({
     baseURL: 'http://localhost:3000',
 })
 
-export function fetchRate(source: string, target: string): Promise<{ data: IResponseGetFindExchangeRate[] }> {
-    return baseApi.get(`/find-best-exchange?sourceKey=${source}&targetKey=${target}&out=json`)
+export async function fetchRate(source: string, target: string): Promise<IFetchRate> {
+    const response = await baseApi.get(`/find-best-exchange?sourceKey=${source}&targetKey=${target}&out=json`);
+
+    return {
+        source,
+        target,
+        response: response.data,
+    }
 }

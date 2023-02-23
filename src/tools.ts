@@ -10,9 +10,9 @@ export const getParents = (currency: ICurrency, acc: IGetExchangeResponseFormat 
         return getParents(currency.prev, acc)
     }
 
-    acc.rate = acc.rate * currency.exchangeRate;
-    acc.code = `${currency.fromCurrencyCode}, ${currency.toCurrencyCode}, ${acc.code}`;
-    acc.countries = `${currency.fromCurrencyName}, ${currency.toCurrencyName}, ${acc.countries}`;
+    acc.rate = acc.rate ? acc.rate * currency.exchangeRate : currency.exchangeRate;
+    acc.code = `${currency.fromCurrencyCode}, ${currency.toCurrencyCode}${acc.code ? `, ${acc.code}` : ''}`;
+    acc.countries = `${currency.fromCurrencyName}, ${currency.toCurrencyName}${acc.countries ? `, ${acc.countries}` : ''}`;
     acc.amount = 100 * acc.rate;
     return acc;
 };
@@ -27,6 +27,12 @@ export const isTarget = (currency: ICurrency, targetKey: string): boolean | IGet
 
 export const findAvailableCurrency = (parent: ICurrency, currencies, targetKey: string, results: IGetExchangeResponseFormat[]): void => {
     const currencyList = currencies.get(parent.toCurrencyCode) || [];
+
+    // handle case if we can exchange directly
+    const targetFound = isTarget(parent, targetKey);
+    if (typeof targetFound === 'object') {
+        results.push(targetFound);
+    }
 
     currencyList.map((curr) => {
         curr.prev = parent;

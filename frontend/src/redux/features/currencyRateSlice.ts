@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
-import { fetchRate, IResponseGetFindExchangeRate } from './currencyExchangeRateAPI';
+import { fetchRate, IFetchRate, IResponseGetFindExchangeRate } from './currencyExchangeRateAPI';
 
 interface ICurrencyRateState {
     requests: {[p: string]: IResponseGetFindExchangeRate[]},
@@ -12,12 +12,10 @@ const initialState: ICurrencyRateState = {
     status: 'idle',
 }
 
-export const getExchange = createAsyncThunk<IResponseGetFindExchangeRate[], { source: string, target: string }>(
+export const getExchange = createAsyncThunk<IFetchRate, { source: string, target: string }>(
     'counter/fetchRate',
-    async ({ source, target }): Promise<IResponseGetFindExchangeRate[]> => {
-        const response = await fetchRate(source, target);
-        // The value we return becomes the `fulfilled` action payload
-        return response.data;
+    async ({ source, target }): Promise<IFetchRate> => {
+        return fetchRate(source, target);
     }
 );
 
@@ -37,9 +35,11 @@ export const currencyRateSlice = createSlice({
                 const minutes = time.getMinutes();
                 const seconds = time.getSeconds();
 
+                const {response, target, source} = action.payload;
+
                 state.requests = {
                     ...state.requests,
-                    [`${hours}:${minutes}:${seconds}`]: action.payload,
+                    [`${hours}:${minutes}:${seconds} [${source} -> ${target}]`]: response,
                 };
             })
             .addCase(getExchange.rejected, (state) => {
