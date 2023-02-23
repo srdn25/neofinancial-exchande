@@ -25,7 +25,7 @@ export default function About() {
             </p>
 
             <div id="phone-image-full-width">
-                <img src='/phone-image.jpg' />
+                <img alt='phone' src='/phone-image.jpg' />
             </div>
         </div>
     );

@@ -10,6 +10,8 @@
     "inlineSources": true,
     "newLine": "lf"
   },
-  "include": ["./src/**/*"],
+  "include": [
+    "./src/**/*"
+  ],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { assert, spy } from 'sinon';
 import * as fixtureResponse from '../fixtures/exchangeApi.json';
 import { createKey, getParents, isTarget } from '../../src/tools';
 

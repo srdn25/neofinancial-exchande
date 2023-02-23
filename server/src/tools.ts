@@ -25,7 +25,7 @@ export const isTarget = (currency: ICurrency, targetKey: string): boolean | IGet
     return false;
 };
 
-export const findAvailableCurrency = (parent: ICurrency, currencies, targetKey: string, results: IGetExchangeResponseFormat[]): void => {
+export const findAvailableCurrency = (parent: ICurrency, currencies, targetKey: string, results: IGetExchangeResponseFormat[]) => {
     const currencyList = currencies.get(parent.toCurrencyCode) || [];
 
     // handle case if we can exchange directly

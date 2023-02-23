@@ -4,7 +4,6 @@ import './FindBestRate.css';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { getExchange, selectCurrencyRate } from '../redux/features/currencyRateSlice';
 import ExchangeTable from '../components/ExchangeTable';
-import { IResponseGetFindExchangeRate } from '../redux/features/currencyExchangeRateAPI';
 
 export default function FindBestRate() {
     const [sourceCurrency, setSourceCurrency] = React.useState('');

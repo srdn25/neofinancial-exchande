@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  nginx:
+    depends_on:
+      - api
+      - frontend
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "8080:80"
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    ports:
+      - "3000:3000"
+
+  frontend:
+    environment:
+      - PORT=4000
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app

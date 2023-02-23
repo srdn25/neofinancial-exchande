@@ -28,7 +28,7 @@ export default function (): IApp {
      * Initializers and middlewares
      */
     app.koa.use(cors({
-        origin: 'http://localhost:4000',
+        origin: '*',
         credentials: true,
     }));
 
@@ -39,10 +39,6 @@ export default function (): IApp {
     app.koa
         .use(app.router.routes())
         .use(app.router.allowedMethods())
-        // .use(cors({
-        //     origin: 'localhost',
-        //     credentials: true,
-        // }));
 
     return app;
 };
