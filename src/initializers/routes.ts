@@ -1,6 +1,6 @@
+import * as Application from 'koa';
 import { IApp } from '../interfaces/IApp';
 import { exchange } from '../api/exchange';
-import * as Application from 'koa';
 
 export default function initRoutes(app: IApp) {
     app.router.get(

@@ -2,6 +2,7 @@ import 'dotenv/config';
 import * as http from 'http';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
+import * as cors from '@koa/cors';
 import { IApp } from './interfaces/IApp';
 import initRoutes from './initializers/routes';
 import exchangeApiInit from './initializers/exchangeApi';
@@ -26,6 +27,11 @@ export default function (): IApp {
     /**
      * Initializers and middlewares
      */
+    app.koa.use(cors({
+        origin: 'http://localhost:4000',
+        credentials: true,
+    }));
+
     initRoutes(app);
     exchangeApiInit(app);
     errorHandler(app);
@@ -33,6 +39,10 @@ export default function (): IApp {
     app.koa
         .use(app.router.routes())
         .use(app.router.allowedMethods())
+        // .use(cors({
+        //     origin: 'localhost',
+        //     credentials: true,
+        // }));
 
     return app;
 };

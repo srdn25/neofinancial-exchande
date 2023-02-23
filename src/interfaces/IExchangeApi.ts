@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import {ICurrency} from './IEntities';
+import { ICurrency } from './IEntities';
 export interface IBaseApi {
     get (
         path: string,

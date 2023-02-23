@@ -1,0 +1,8 @@
+.not-found {
+    height: 100vh;
+    background: var(--dun);
+    color: var(--antiflash-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

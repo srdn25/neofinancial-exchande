@@ -1,0 +1,12 @@
+.exchange-form {
+    max-width: 90vw;
+    min-width: 500px;
+    margin: auto;
+}
+
+.exchange-form details {
+    margin-top: 15px;
+    border: 1px solid var(--jet);
+    border-radius: 5px;
+    background: var(--dun);
+}

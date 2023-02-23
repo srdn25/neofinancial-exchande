@@ -6,8 +6,8 @@ import { ICurrency } from '../interfaces/IEntities';
 
 export async function exchange(app: IApp, ctx: Application.Context, next: Application.Next) {
     const targetKey = String(ctx.query.targetKey);
-    const sourceKey = ctx.query.sourceKey;
-
+    const sourceKey = String(ctx.query.sourceKey);
+    const out = String(ctx.query.out);
 
     const parentsList = [];
     const currenciesMap = new Map<string, ICurrency[]>();
@@ -32,6 +32,11 @@ export async function exchange(app: IApp, ctx: Application.Context, next: Applic
     parentsList.forEach((parent) => {
         findAvailableCurrency(parent, currenciesMap, targetKey, results);
     });
+
+    if (out === 'json') {
+        ctx.body = results;
+        return;
+    }
 
     ctx.type = 'text/csv';
     ctx.response.attachment(`${sourceKey}-${targetKey}.csv`);
